@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+var values = [];
+app.use(bodyParser.urlencoded({ extended: true }));
 app.set('view engine','ejs')
 app.get("/", function (req, res) {
     var date = new Date();
@@ -11,8 +13,15 @@ app.get("/", function (req, res) {
     };
     var day = date.toLocaleDateString("en-IN", option);
     
-    res.render("list", { KindOfDay: day });
+    res.render("list", { KindOfDay: day,newItems:values });
 })
 app.listen(3000, function () {
     console.log("listening on 3000");
+})
+app.post("/", function (req,res) {
+    
+    var value = req.body.item;
+    values.push(value);
+    res.redirect("/"); 
+
 })
