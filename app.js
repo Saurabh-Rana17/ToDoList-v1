@@ -14,7 +14,7 @@ app.set('view engine', 'ejs');
 app.get(process.env.PORT||3000, function (req, res) {
     let day = Date();
 
-    console.log(day);
+    
     
     res.render("list", { listTitle: day, newItems: values });
 });
