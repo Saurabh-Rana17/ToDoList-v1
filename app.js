@@ -11,7 +11,7 @@ app.use(express.static(__dirname+"/public"));
 
 app.set('view engine', 'ejs');
 
-app.get("/", function (req, res) {
+app.get(process.env.PORT||3000, function (req, res) {
     let day = Date();
 
     console.log(day);
