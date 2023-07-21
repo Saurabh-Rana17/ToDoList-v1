@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const Date = require(__dirname + "/date.js");
 
 var values = ['one', 'two', 'three'];
 var workItem = [];
@@ -11,13 +12,9 @@ app.use(express.static(__dirname+"/public"));
 app.set('view engine', 'ejs');
 
 app.get("/", function (req, res) {
-    var date = new Date();
-    var option = {
-        weekday: "long",
-        day: "numeric",
-        month: "long"
-    };
-    var day = date.toLocaleDateString("en-IN", option);
+    let day = Date();
+
+    console.log(day);
     
     res.render("list", { listTitle: day, newItems: values });
 });
@@ -37,7 +34,7 @@ app.post("/work", function (req, res) {
 
 
 app.post("/", function (req, res) {
-    console.log(req.body);
+    // console.log(req.body);
     let value = req.body.item;
     
     if (req.body.list == "Work") {
